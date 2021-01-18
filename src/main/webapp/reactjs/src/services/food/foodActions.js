@@ -47,6 +47,21 @@ export const deleteFood = foodId => {
     };
 };
 
+export const fetchFood = foodId => {
+    return dispatch => {
+        dispatch({
+            type: FT.FETCH_FOOD_REQUEST
+        });
+        axios.get("http://localhost:7999/rest/foods/"+foodId)
+            .then(response => {
+                dispatch(foodSuccess(response.data));
+            })
+            .catch(error => {
+                dispatch(foodFailure(error));
+            });
+    };
+};
+
 const foodSuccess = food => {
     return{
         type: FT.FOOD_SUCCESS,

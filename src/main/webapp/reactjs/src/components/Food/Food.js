@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
-import {saveFood, updateFood} from '../../services/index';
-
+import {saveFood, updateFood, fetchFood} from '../../services/index';
 import {Card, Form, Button, Col, InputGroup, Image} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave,faPlusSquare, faUndo, faList, faEdit} from '@fortawesome/free-solid-svg-icons';
@@ -83,7 +82,7 @@ class Food extends Component {
 
         this.props.saveFood(food);
         setTimeout(() => {
-            if(this.props.foodObject.food != null){
+            if(this.props.savedFoodObject.food != null){
                 this.setState({"show":true, "method":"post"});
                 setTimeout(() => this.setState({"show":false}), 3000);
             }else{
@@ -105,9 +104,10 @@ class Food extends Component {
             price: this.state.price,
             type: this.state.type
         };
+
         this.props.updateFood(food);
         setTimeout(() => {
-            if(this.props.foodObject.food != null){
+            if(this.props.updatedFoodObject.food != null){
                 this.setState({"show":true, "method":"put"});
                 setTimeout(() => this.setState({"show":false}), 3000);
             }else{
@@ -223,14 +223,17 @@ class Food extends Component {
 
 const mapStateToProps = state => {
     return {
+        savedFoodObject: state.food,
         foodObject: state.food,
+        updatedFoodObject: state.food
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         saveFood: (food) => dispatch(saveFood(food)),
-        updateFood: (food) => dispatch(updateFood(food))
+        updateFood: (food) => dispatch(updateFood(food)),
+        fetchFood: (foodId) => dispatch(fetchFood(foodId))
     };
 };
 

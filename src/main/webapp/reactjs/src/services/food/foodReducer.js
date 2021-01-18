@@ -1,4 +1,5 @@
 import * as FT from "./foodTypes";
+
 const initialState = {
     food: '', error: ''
 };

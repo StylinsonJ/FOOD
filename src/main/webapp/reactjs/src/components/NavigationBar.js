@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import {Navbar, Nav} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserPlus, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUserPlus, faSignInAlt, faSignOutAlt, faHome, faHouseDamage, faUtensils, faMoneyBill, faMoneyBillAlt, faMoneyBillWave } from '@fortawesome/free-solid-svg-icons';
 import {logoutUser} from '../services/index';
+
 
 class NavigationBar extends Component {
     logout = () => {
@@ -16,8 +17,8 @@ class NavigationBar extends Component {
             <>
                 <div className="mr-auto"></div>
                 <Nav className="navbar-right">
-                    <Link to={"register"} className="nav-link"><FontAwesomeIcon icon={faUserPlus}/> Register</Link>
-                    <Link to={"login"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt}/> Login</Link>
+                    <Link to={"register"} className="nav-link"><FontAwesomeIcon icon={faUserPlus}/> Registrarse</Link>
+                    <Link to={"login"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>
                 </Nav>
             </>
         );
@@ -25,12 +26,12 @@ class NavigationBar extends Component {
         const userLinks = (
             <>
                  <Nav className="mr-auto">
-                    <Link to={"add"} className="nav-link">Add Food</Link>
-                    <Link to={"list"} className="nav-link">Food List</Link>
-                    <Link to={"users"} className="nav-link">User List</Link>
+                    <Link to={"add"} className="nav-link">Añadir comida</Link>
+                    <Link to={"list"} className="nav-link">Listar Comida</Link>
+                    <Link to={"users"} className="nav-link">Lista de usuarios</Link>
                 </Nav>
                 <Nav className="navbar-right">
-                    <Link to={"logout"} className="nav-link" onClick={this.logout}><FontAwesomeIcon icon={faSignOutAlt}/> Logout</Link>  
+                    <Link to={"logout"} className="nav-link" onClick={this.logout}><FontAwesomeIcon icon={faSignOutAlt}/> Cerrar Sesión</Link>  
                 </Nav>
             </>
         );
@@ -38,9 +39,12 @@ class NavigationBar extends Component {
         return(
             <Navbar bg="dark" variant="dark">
                 <Link to={""} className="navbar-brand">
-                    <img src="https://png.pngtree.com/png-clipart/20190520/original/pngtree-food-logo-designs-with-spoon-and-fork-png-image_4158238.jpg" width="25" height="25"/>Food Store
+                    <img src="https://logos-download.com/wp-content/uploads/2018/04/Food_logo_uk.png" width="100" height="40"/>
                 </Link>
-                {this.props.auth.isLoggedIn ? userLinks : guestLinks}
+                <Link to={"/"} className="nav-link"><FontAwesomeIcon icon={faHome}/> Home</Link>
+                <Link to={"list"} className="nav-link"><FontAwesomeIcon icon={faUtensils}/> Menu</Link>
+                <Link to={"add"} className="nav-link">Añadir comida</Link>
+                 {this.props.auth.isLoggedIn ? userLinks : guestLinks}
             </Navbar>
         );
     };

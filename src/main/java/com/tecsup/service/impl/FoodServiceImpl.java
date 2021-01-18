@@ -1,6 +1,5 @@
 package com.tecsup.service.impl;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.codehaus.jettison.json.JSONException;
@@ -10,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.tecsup.domain.Food;
+import com.tecsup.model.Food;
 import com.tecsup.repository.FoodRepository;
 import com.tecsup.service.IPageService;
 import com.tecsup.service.IService;
@@ -20,11 +19,7 @@ public class FoodServiceImpl implements IService<Food>, IPageService<Food>{
 
 	@Autowired 
 	private FoodRepository foodRepository;
-	
-	@Override
-	public Collection<Food> findAll() {
-		return (Collection<Food>) foodRepository.findAll();
-	}
+
 	
 	@Override
 	public Page<Food> findAll(Pageable pageable, String searchText) {
